@@ -17,3 +17,27 @@ xlabel('In-Phase');
 ylabel('Quadrature');
 grid on;
 axis equal;
+
+for k= 1:length(SNRdB)
+    snr = 10^(SNRdB(k)/10);
+    noise= (randn(1,N) + 1j*randn(1,N)/sqrt(2*snr));
+
+    rx_sym = tx_sym + noise;
+
+    % Demodulation
+
+    rx_phase= angle(rx_sym);
+    rx_data= mod(round(rx_phase+pi/(2*pi/M),M));
+    BER_sim(k)= sum(rx_data ~= data)/N;
+    BER_theory(k)= erfc(sqrt(snr)*sin(pi/M));
+
+end
+
+semilogy(SNRdB, BER_sim, 'bo-','Linewidth',1.5);
+semilogy(SNRdB, BER_theory, 'r--','Linewidth',1.5);
+
+
+     
+
+
+
