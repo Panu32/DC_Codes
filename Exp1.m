@@ -63,3 +63,4 @@ title('PDF: mean = 3, std = 1');   % Title for this plot
 xlabel('x');                       % Label for X-axis
 ylabel('f(x)');                    % Label for Y-axis
 grid on;                           % Enable grid lines
+% Donee all FInally
